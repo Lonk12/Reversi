@@ -107,8 +107,7 @@ INT NEAR PASCAL legalcheck(BYTE b[], INT move, INT friendly, INT enemy);
  * the call.  The cursor will appear at the new position
  */
 
-VOID NEAR PASCAL UpdateCursor(
-HWND    hwnd)
+VOID NEAR PASCAL UpdateCursor(HWND hwnd)
 {
   POINT curpoint;
 
@@ -125,9 +124,7 @@ HWND    hwnd)
 /*                                                                          */
 /*--------------------------------------------------------------------------*/
 
-VOID NEAR PASCAL checkdepth(
-HWND hWindow,
-WORD  d)
+VOID NEAR PASCAL checkdepth(HWND hWindow, WORD d)
 {
   HMENU hMenu;
 
@@ -144,10 +141,9 @@ WORD  d)
 /*                                                                          */
 /*--------------------------------------------------------------------------*/
 
-VOID NEAR PASCAL clearboard(
-BYTE b[max_depth+2][BoardSize])
+VOID NEAR PASCAL clearboard(BYTE b[max_depth+2][BoardSize])
 {
-  register INT  i,j;
+  register INT  i, j;
   INT           k;
 
   for (i=0; i<=max_depth ; i++)

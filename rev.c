@@ -7,32 +7,27 @@
 VOID NEAR PASCAL paintmove(BYTE b[BoardSize], INT move, INT friendly, INT enemy);
 BOOL NEAR PASCAL msgcheck(VOID);
 
-extern INT     moves[61];
-extern INT     BestMove[max_depth+2];
-extern HWND    hWin;
-extern HDC     hDisp;
-extern INT     depth;
-extern INT     direc[];
-
+extern INT moves[61];
+extern INT BestMove[max_depth+2];
+extern HWND hWin;
+extern HDC hDisp;
+extern INT depth;
+extern INT direc[];
 
 /*       Indexes for computing scores and whether or not a player has       */
 /*       any pieces on the board.  Very order dependant.                    */
 
-BYTE PieceFlags[] = {   0x00 ,      /* Ignore sides */
-                        0x00 ,      /* Ignore blanks */
-                        0x01 ,      /* Human has a piece */
-                        0x02 ,      /* Computer has a piece */
+BYTE PieceFlags[] = {0x00,      /* Ignore sides */
+                     0x00,      /* Ignore blanks */
+                     0x01,      /* Human has a piece */
+                     0x02,      /* Computer has a piece */
                     };
-
-                    
-INT Scores[] = { 0, 0 };
+                   
+INT Scores[] = {0, 0};
 INT humanScore = 0;
 INT compScroe = 0;
 
- 
-
-BYTE FinalComp[] = {0, 0, -1, 1 };   /* Table for compute # computer pieces */
-
+BYTE FinalComp[] = {0, 0, -1, 1};   /* Table for compute # computer pieces */
 BYTE FinalHuman[] = {0, 0, 1, -1};   /* Table for compute # human pieces    */
 
 /*
@@ -44,53 +39,76 @@ BYTE FinalHuman[] = {0, 0, 1, -1};   /* Table for compute # human pieces    */
  *       undetermined performance hit.
  */
 
-#define B11     11    /* Offsets to particular squares */
-#define B18     18 
-#define B81     81 
-#define B88     88 
+#define B11 11    /* Offsets to particular squares */
+#define B18 18 
+#define B81 81 
+#define B88 88 
 
-#define maskb11     0x08    /* Masks used for indexing into Scoring tables. */
-#define maskb18     0x04
-#define maskb81     0x02
-#define maskb88     0x01
+#define maskb11 0x08    /* Masks used for indexing into Scoring tables. */
+#define maskb18 0x04
+#define maskb81 0x02
+#define maskb88 0x01
 
 
 INT NEAR PASCAL finalscore(BYTE b[], BYTE friendly, BYTE enemy)
 {
+
     INT i;
     INT count=0;
 
-    for (i=11 ; i<=88 ; i++) {
+    for (i=11 ; i<=88 ; i++)
+    {
+
         if (b[i] == friendly) count++;
+
         else if (b[i] == enemy) count--;
+
     }
+
     if (count > 0)
         return(win +  count);
+
     else if (count < 0)
         return(loss + count);
+
     else
         return(0);
+
 }
 
 
 
 INT NEAR PASCAL legalcheck(BYTE b[], INT move, BYTE friendly, BYTE enemy)
 {
+
    INT sq,d;
    INT *p;
 
-   if (b[move] == empty) {
+   if (b[move] == empty)
+   {
+
       p=direc;
-      while ((d = *p++) != 0) {
+
+      while ((d = *p++) != 0)
+      {
+
           sq=move;
-          if (b[sq += d] == enemy) {
-             while(b[sq += d] == enemy)
-                ;
+
+          if (b[sq += d] == enemy)
+          {
+
+              while (b[sq += d] == enemy);
+
              if (b[sq] == friendly) return(1);
+
           }
+
       }
+
    }
+
    return(0);
+
 }
 
 
