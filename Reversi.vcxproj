@@ -75,6 +75,7 @@
     <SourcePath>I:\Windows XP Source\WinXPSource-master\nt5src-master\Source\XPSP1\NT\shell\osshell\games\reversi;$(SourcePath)</SourcePath>
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
     <CopyLocalProjectReference>true</CopyLocalProjectReference>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -133,6 +134,7 @@
       <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
       <TranslateIncludes>true</TranslateIncludes>
       <CompileAs>Default</CompileAs>
+      <AnalyzeExternalRuleset>AllRules.ruleset</AnalyzeExternalRuleset>
     </ClCompile>
     <Link>
       <ShowProgress>NotSet</ShowProgress>
@@ -144,6 +146,9 @@
       <SubSystem>Windows</SubSystem>
       <LargeAddressAware>true</LargeAddressAware>
     </Link>
+    <Manifest>
+      <EnableDpiAwareness>PerMonitorHighDPIAware</EnableDpiAwareness>
+    </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="rev.c" />
